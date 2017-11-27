@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="JewishOrganizer.PivotItems.Calc"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="using:JewishOrganizer.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+	<Page.Resources>
+		<converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+	</Page.Resources>
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0"
+					  Text="Объём всего:"/>
+		<TextBox Grid.Row="1" Margin="5"
+					 Text="{Binding TotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
+		<TextBlock Grid.Row="2" 
+					  Text="Цена за объём:"/>
+		<TextBox Grid.Row="3" Margin="5"
+					 Text="{Binding PricePerTotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
+		<TextBlock Grid.Row="4" 
+					  Text="Посчитать стоимость объёма:"/>
+		<TextBox Grid.Row="5" Margin="5"
+					 Text="{Binding CalcPriceForValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
+		<TextBlock Grid.Row="6" Grid.Column="0" Margin="5"
+					  Text="Стоимость объёма:"/>
+		<TextBlock Grid.Row="7" Grid.Column="1" Margin="5"
+					 Text="{Binding Result, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+		<Button Grid.Row="8" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
+			Content="Посчитать" Command="{Binding Calc}"/>
+	</Grid>
+</Page>

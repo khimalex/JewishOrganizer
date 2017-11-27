@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="JewishOrganizer.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:JewishOrganizer"
+	xmlns:pivotItems="using:JewishOrganizer.PivotItems"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Pivot Name="rootPivot" Title="Еврейский органайзер">
+			<Pivot.RightHeader>
+				<CommandBar ClosedDisplayMode="Minimal">
+					<AppBarButton Icon="Back" Label="Назад" Click="Back_Click"/>
+					<AppBarButton Icon="Forward" Label="Далее" Click="Forward_Click"/>
+				</CommandBar>
+				
+			</Pivot.RightHeader>
+			<PivotItem Header="Калькулятор">
+				<pivotItems:Calc/>
+			</PivotItem>
+		</Pivot>
+    </Grid>
+</Page>
