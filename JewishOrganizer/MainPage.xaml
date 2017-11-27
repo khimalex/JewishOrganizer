@@ -7,19 +7,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<Pivot Name="rootPivot" Title="Еврейский органайзер">
+		<Pivot Name="rootPivot" Title="Еврейский органайзер" >
 			<Pivot.RightHeader>
 				<CommandBar ClosedDisplayMode="Minimal">
 					<AppBarButton Icon="Back" Label="Назад" Click="Back_Click"/>
 					<AppBarButton Icon="Forward" Label="Далее" Click="Forward_Click"/>
 				</CommandBar>
-				
 			</Pivot.RightHeader>
-			<PivotItem Header="Калькулятор">
+			<PivotItem>
+				<PivotItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8EF;"/>
+						<TextBlock Text="Калькулятор"/>
+					</StackPanel>
+				</PivotItem.Header>
 				<pivotItems:Calc/>
 			</PivotItem>
 		</Pivot>
-    </Grid>
+	</Grid>
 </Page>

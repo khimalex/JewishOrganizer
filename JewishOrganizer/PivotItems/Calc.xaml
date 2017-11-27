@@ -9,35 +9,37 @@
 	<Page.Resources>
 		<converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
 	</Page.Resources>
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<TextBlock Grid.Row="0"
+	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Disabled">
+		<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0"
 					  Text="Объём всего:"/>
-		<TextBox Grid.Row="1" Margin="5"
+			<TextBox Grid.Row="1" Margin="5"
 					 Text="{Binding TotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-		<TextBlock Grid.Row="2" 
+			<TextBlock Grid.Row="2" 
 					  Text="Цена за объём:"/>
-		<TextBox Grid.Row="3" Margin="5"
+			<TextBox Grid.Row="3" Margin="5"
 					 Text="{Binding PricePerTotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-		<TextBlock Grid.Row="4" 
+			<TextBlock Grid.Row="4" 
 					  Text="Посчитать стоимость объёма:"/>
-		<TextBox Grid.Row="5" Margin="5"
+			<TextBox Grid.Row="5" Margin="5"
 					 Text="{Binding CalcPriceForValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-		<TextBlock Grid.Row="6" Grid.Column="0" Margin="5"
+			<TextBlock Grid.Row="6" Grid.Column="0" Margin="5"
 					  Text="Стоимость объёма:"/>
-		<TextBlock Grid.Row="7" Grid.Column="1" Margin="5"
+			<TextBlock Grid.Row="7" Grid.Column="1" Margin="5"
 					 Text="{Binding Result, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-		<Button Grid.Row="8" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
+			<Button Grid.Row="8" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
 			Content="Посчитать" Command="{Binding Calc}"/>
-	</Grid>
+		</Grid>
+	</ScrollViewer>
 </Page>
