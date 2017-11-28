@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="7fb503c8-9523-40b0-9297-996a2d7a424d" Publisher="CN=khimushkin_as" Version="1.0.9.0" />
+  <Identity Name="7fb503c8-9523-40b0-9297-996a2d7a424d" Publisher="CN=khimushkin_as" Version="1.0.11.0" />
   <mp:PhoneIdentity PhoneProductId="7fb503c8-9523-40b0-9297-996a2d7a424d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>JewishOrganizer</DisplayName>
