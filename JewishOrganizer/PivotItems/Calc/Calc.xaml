@@ -9,41 +9,81 @@
 	<Page.Resources>
 		<converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
 	</Page.Resources>
-	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Disabled">
-		<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0" Grid.Column="1"
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0" Grid.Column="1"
 					  Text="Всего:"/>
-			<TextBox Grid.Row="1" Grid.Column="1" Margin="5"
+		<TextBox Grid.Row="1" Grid.Column="1" Margin="5"
 					 Text="{Binding TotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-			<TextBlock Grid.Row="2" Grid.Column="1"
+		<TextBlock Grid.Row="2" Grid.Column="1"
 					  Text="Цена:"/>
-			<TextBox Grid.Row="3" Grid.Column="1" Margin="5"
+		<TextBox Grid.Row="3" Grid.Column="1" Margin="5"
 					 Text="{Binding PricePerTotalValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-			<TextBlock Grid.Row="4" Grid.Column="1"
+		<TextBlock Grid.Row="4" Grid.Column="1"
 					  Text="Вычисляемая часть:"/>
-			<TextBox Grid.Row="5" Grid.Column="1" Margin="5"
+		<TextBox Grid.Row="5" Grid.Column="1" Margin="5"
 					 Text="{Binding CalcPriceForValue, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-			<TextBlock Grid.Row="6" Grid.Column="1" Margin="5"
+		<TextBlock Grid.Row="6" Grid.Column="1" Margin="5"
 					  Text="Стоимость части:"/>
-			<TextBlock Grid.Row="7" Grid.Column="1" Margin="5"
+		<TextBlock Grid.Row="7" Grid.Column="1" Margin="5"
 					 Text="{Binding Result, Converter={StaticResource DecimalToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-			<Button Grid.Row="0" Grid.RowSpan="8" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
-			Content="Посчитать" Command="{Binding Calc}"/>
-		</Grid>
-	</ScrollViewer>
+		<Button Grid.Row="0" Grid.RowSpan="8" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
+			Content="Посчитать" Command="{Binding CalcCommand}"/>
+
+		<ScrollViewer Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Disabled">
+			<ListView  Margin="5"
+						 ItemsSource="{Binding History}">
+				<ListView.ItemContainerStyle>
+					<Style TargetType="ListViewItem">
+						<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+					</Style>
+				</ListView.ItemContainerStyle>
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<Grid HorizontalAlignment="Stretch">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Grid.Column="0" Margin="5"
+										  Text="{Binding TotalValue}"/>
+							<TextBlock Grid.Column="1" Margin="5"
+										  Text="за"/>
+							<TextBlock Grid.Column="2" Margin="5"
+										  Text="{Binding PricePerTotalValue}"/>
+							<TextBlock Grid.Column="4" Margin="5"
+										  Text="{Binding CalcPriceForValue}"/>
+							<TextBlock Grid.Column="5" Margin="5"
+										  Text="за"/>
+							<TextBlock Grid.Column="6" Margin="5"
+										  Text="{Binding Result}"/>
+						</Grid>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</ScrollViewer>
+
+		<Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"
+					  Content="Очистить историю" Command="{Binding ClearHistoryCommand}"/>
+	</Grid>
 </Page>

@@ -1,5 +1,6 @@
 ﻿using JewishOrganizer.Commands;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -9,10 +10,12 @@ namespace JewishOrganizer.PivotItems
 {
 	public sealed class CalcVM : ViewModelBase
 	{
-		private const String NotAllowed = "Неправильно заданы параметры";
+		private const String _NotAllowed = "Неправильно заданы параметры";
 		public CalcVM()
 		{
-			Calc = AsyncCommandFactory.Create(CalcCommand);
+			CalcCommand = AsyncCommandFactory.Create(CalcAsync);
+			ClearHistoryCommand = AsyncCommandFactory.Create(ClearHistoryAsync);
+			History = new ObservableCollection<HistoryItem>();
 		}
 		private Decimal _TotalValue;
 		public Decimal TotalValue
@@ -43,18 +46,48 @@ namespace JewishOrganizer.PivotItems
 			set { SetField(ref _Result, value); }
 		}
 
-		public Task CalcCommand()
+		public ObservableCollection<HistoryItem> History { get; private set; }
+
+
+		public Task CalcAsync()
 		{
 			if (TotalValue <= 0.0m)
 			{
-				Result = NotAllowed;
+				Result = _NotAllowed;
 			}
 			else
+			{
 				Result = ((CalcPriceForValue * PricePerTotalValue) / TotalValue).ToString();
+				History.Add(new HistoryItem()
+				{
+					CalcPriceForValue = CalcPriceForValue,
+					PricePerTotalValue = PricePerTotalValue,
+					Result = Result,
+					TotalValue = TotalValue
+				});
+			}
+
 			return Task.FromResult(Result);
 		}
-		public ICommand Calc { get; private set; }
+		public Task ClearHistoryAsync()
+		{
+			History.Clear();
+			return Task.FromResult(-1);
 
+		}
+
+		public ICommand CalcCommand { get; private set; }
+		public ICommand ClearHistoryCommand { get; set; }
+
+
+	}
+
+	public sealed class HistoryItem
+	{
+		public Decimal TotalValue { get; set; }
+		public Decimal PricePerTotalValue { get; set; }
+		public Decimal CalcPriceForValue { get; set; }
+		public String Result { get; set; }
 	}
 
 }
