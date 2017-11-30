@@ -63,6 +63,7 @@ namespace JewishOrganizer.PivotItems
 				Result = d.ToString("F");
 				History.Add(new HistoryItem()
 				{
+					Number = History.Count + 1,
 					CalcPriceForValue = CalcPriceForValue,
 					PricePerTotalValue = PricePerTotalValue,
 					Result = Result,
@@ -87,6 +88,7 @@ namespace JewishOrganizer.PivotItems
 
 	public sealed class HistoryItem
 	{
+		public Int32 Number { get; set; }
 		public Decimal TotalValue { get; set; }
 		public Decimal PricePerTotalValue { get; set; }
 		public Decimal CalcPriceForValue { get; set; }
