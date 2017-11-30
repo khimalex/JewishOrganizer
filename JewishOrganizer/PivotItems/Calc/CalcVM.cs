@@ -57,7 +57,10 @@ namespace JewishOrganizer.PivotItems
 			}
 			else
 			{
-				Result = ((CalcPriceForValue * PricePerTotalValue) / TotalValue).ToString();
+				var m = Decimal.Multiply(CalcPriceForValue, PricePerTotalValue);
+				var d = Decimal.Divide(m, TotalValue);
+
+				Result = d.ToString("F");
 				History.Add(new HistoryItem()
 				{
 					CalcPriceForValue = CalcPriceForValue,
